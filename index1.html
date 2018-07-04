@@ -1,0 +1,75 @@
+<!doctype html>
+<html ng-app="front">
+	<head>
+		<title>Hello AngularJS</title>
+	<link rel="stylesheet" href="css/table.css">
+	<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style>
+		td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
+		.selected {
+			background-color: blue;
+			color: black;
+		}
+	</style>
+	</head>
+	<body ng-controller="allUser as user">
+<div class="test" ng-controller="Ctrl">
+  <div ng-repeat="task in tasks">
+   <button ng-click="removeTask(task.id);">remove</button>
+  </div>
+<div>
+<table id="table">
+	<th>
+        <td>First name</td>
+        <td>Last name</td>
+        <td>Date of birth</td>
+        <td>Phone number</td>
+	</th>
+    <tr ng-repeat="user in user.list" ng-click="setClickedRow(user.id)">
+        <td>{{user.id}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.date_of_birth}}</td>
+        <td>{{user.number}}</td>
+    </tr>
+</table>
+<form name="reviewForm" ng-controller="createUser as cruser" ng-submit="cruser.addUser(user)">
+	<fieldset class="form-group">
+		<label>First name</label>
+		<input type="text" ng-model="cruser.user.first_name">
+	</fieldset>
+	<fieldset class="form-group">
+		<label>Last name</label>
+		<input type="text" ng-model="cruser.user.last_name">
+	</fieldset>
+	<fieldset class="form-group">
+		<label>Date of birth</label>
+		<input type="text" ng-model="cruser.user.date_of_birth">
+	</fieldset>
+	<fieldset class="form-group">
+		<label>Number</label>
+		<input type="text" ng-model="cruser.user.number">
+	</fieldset>
+	<fieldset class="form-group">
+		<label>Photo</label>
+		<input type="text" ng-model="cruser.user.photo">
+	</fieldset>
+
+	<fieldset class="form-group">
+		<input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+	</fieldset>
+</form>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			$("#table tr").click(function(){
+			   $(this).addClass('selected').siblings().removeClass('selected');    
+			   var value=$(this).find('td:first').html(); 
+				alert(value);
+			});
+		</script>
+	</body>
+</html>

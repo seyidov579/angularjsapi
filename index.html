@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<style>
+.selected {
+	background-color:black;
+	color:white;
+	font-weight:bold;
+}
+.getuser{
+	float:  right; 
+	margin-top: 135px;
+	border: 1px solid black;
+    background: mediumaquamarine;
+    border-radius: 5px;
+}
+.updateuser{
+	float:  right; 
+	margin-top: 135px;
+	margin-right:-160px;
+	border: 1px solid black;
+    background: mediumaquamarine;
+    border-radius: 5px;
+}
+.adduser{
+	float:  right; 
+	margin-top: 135px;
+	margin-right:-50px;
+	border: 1px solid black;
+    background: mediumaquamarine;
+    border-radius: 5px;
+}
+.deleteuser{
+	float:  right; 
+	margin-top: 135px;
+	margin-right:-270px;
+	border: 1px solid black;
+    background: mediumaquamarine;
+    border-radius: 5px;
+}
+.getalluser{
+	float:  right; 
+	margin-top: 80px;
+	margin-right:-120px;
+	border: 1px solid black;
+    background: mediumaquamarine;
+    border-radius: 5px;
+}
+.deletealluser{
+	float:  right; 
+	margin-top: 60px;
+	margin-right:-245px;
+	border: 1px solid black;
+    background: mediumaquamarine;
+    border-radius: 5px;
+}
+.messages{
+	float: right;
+    margin-top: 170px;
+    margin-left: -100px;
+    margin-right: -180px;
+}
+.reset{
+	float:  right; 
+	margin-top: 160px;
+	margin-right:-315px;
+	border: 1px solid black;
+    background: mediumaquamarine;
+    border-radius: 5px;
+}
+</style>
+<html ng-app="app">
+<head>
+<meta charset="ISO-8859-1">
+<title>User CRUD</title>
+<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen"/>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+<body>
+	<div ng-controller="UserCRUDCtrl">
+			<img ng-src="images/{{user.photo}}" width="200" height="200" style="padding:16px; border:1px solid #f1f1f1; margin:16px;" />
+			<table class="table table-bordered" style="width: 70%;">
+			<th>
+				<td>First name</td>
+				<td>Last name</td>
+				<td>Date of birth</td>
+				<td>Phone number</td>
+			</th>
+			<tr ng-repeat="usr in users" ng-class="{'selected':{{usr.id}} == selectedRow}" ng-click="setClickedRow(usr.id)">
+			
+				<td>{{$index}}</td>
+				<td>{{usr.first_name}}</td>
+				<td>{{usr.last_name}}</td>
+				<td>{{usr.date_of_birth}}</td>
+				<td>{{usr.number}}</td>
+			</tr>
+			</table>
+			<table style="float:right;">
+				<tr>
+					
+					<td><input type="hidden" id="id" ng-model="user.id" /></td>
+				</tr>
+				<tr>
+					<td width="100">First Name:</td>
+					<td><input type="text" id="first_name" ng-model="user.first_name" /></td>
+				</tr>
+				<tr>
+					<td width="100">Last Name:</td>
+					<td><input type="text" id="last_name" ng-model="user.last_name" /></td>
+				</tr>
+				<tr>
+					<td width="100">Date of Birth:</td>
+					<td><input type="text" id="date_of_birth" ng-model="user.date_of_birth" placeholder="YYYY-MM-DD" required 
+pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" 
+title="Enter a date in this format YYYY-MM-DD"/></td>
+				</tr>
+				<tr>
+					<td width="100">Number:</td>
+					<td><input type="text" id="number" ng-model="user.number" /></td>
+				</tr>
+				
+				<tr>
+					<td width="100">Photo:</td>
+					<td><input type="file" file-input="files"/></td>
+				</tr>
+			</table>
+			<br /> <br />  
+			<a class="updateuser" ng-click="updateUser(user.id,user.first_name,user.last_name, user.date_of_birth,user.number)">Update User</a> 
+			<a class="adduser" ng-click="addUser(user.first_name,user.last_name, user.date_of_birth,user.number, files)">Add User</a> 
+			<a class="deleteuser" ng-click="deleteUser(user.id)">Delete User</a>
+			<a class="reset" ng-click="reset();">Clear</a>
+
+		<br /> <br />
+		<p class="messages" style="color: green">{{message}}</p>
+		<p class="messages" style="color: red">{{errorMessage}}</p>
+
+		<br />
+		<br /> 
+		<a class="getalluser" ng-click="getAllUsers()">Get all Users</a><br /> 
+		<a class="deletealluser" ng-click="deleteAllUsers()">Delete all Users</a><br /> 
+		<br/> <br />
+	</div>
+	<script src="js/angular.min.js"></script>
+	<script src="js/app1.js"></script>
+</body>
+</html>
